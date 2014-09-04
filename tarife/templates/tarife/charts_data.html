@@ -42,10 +42,13 @@ OVO JE OD PRIJE
 {% endcomment %}
 
 <p>
-{{ rez_mreza.0 }}</p><p>
 {{ len_br }}</p><p>
 {{ br_racuna }}</p><p>
+{{ rez }}</p><p>
+{{ rez.0 }}</p><p>
 {{ rez.0.0 }}</p><p>
+{{ rez.0.0.0 }}</p><p>
+{{ rez.0.0.0.1 }}</p><p>
 {{ rez_mjesec }}
 </p>
 
@@ -56,6 +59,16 @@ OVO JE OD PRIJE
         Najmanja cijena mora biti zadnja
         NESNIJE BIT RAZMAKA unurat <pre> taga
 {% endcomment %}
+
+{% comment %}
+{% for i in rez_mjesec %}
+    {{ i }}
+{% endcomment %}
+{% for k1 in rez %}{% for k2 in k1 %}{% for k3 in k2 %}{{ k3.0 }}---{{ k3.1 }}###{{ k3.2 }}{% endfor %}{% endfor %}{% endfor %}
+{% comment %}
+{% endfor %}
+{% endcomment %}
+
 
 {% for i in rez_mjesec %}
     {% with godina=i.1 mjesec=i.0|capfirst oznaka=i.0|join:i.1 %}

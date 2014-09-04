@@ -40,8 +40,8 @@ def index(request):
 			racun.korisnik = request.user
 			racun.save()
 			korisnik = request.user
-			rez, rez_mjesec, rez_mreza, len_br, br_racuna = izlaz(korisnik)
-			return render(request, 'tarife/izracun.html', {'rez': rez, 'rez_mjesec': rez_mjesec, 'rez_mreza': rez_mreza, 'len_br': len_br, 'br_racuna': br_racuna, 'korisnik': korisnik})
+			rez, rez_mjesec, len_br, br_racuna = izlaz(korisnik)
+			return render(request, 'tarife/izracun.html', {'rez': rez, 'rez_mjesec': rez_mjesec, 'len_br': len_br, 'br_racuna': br_racuna, 'korisnik': korisnik})
 	else:
 		form = RacunForm()
 	return render(request, 'tarife/index.html', {'form': form})
@@ -58,8 +58,8 @@ def izracun(request):
 			postoji = 1
 		i += 1
 	if (postoji):
-		rez, rez_mjesec, rez_mreza, len_br, br_racuna = izlaz(korisnik)
-		return render(request, 'tarife/izracun.html', {'rez': rez, 'rez_mjesec': rez_mjesec, 'rez_mreza': rez_mreza, 'len_br': len_br, 'br_racuna': br_racuna, 'korisnik': korisnik})
+		rez, rez_mjesec, len_br, br_racuna = izlaz(korisnik)
+		return render(request, 'tarife/izracun.html', {'rez': rez, 'rez_mjesec': rez_mjesec, 'len_br': len_br, 'br_racuna': br_racuna, 'korisnik': korisnik})
 	else:
 		form = RacunForm()
 		greska = []
@@ -103,7 +103,6 @@ def izlaz(korisnik):
 	i = j = br_racuna = len_broj = 0
 	rez = []
 	rez_temp4 = []
-	rez_mreza = []
 	rez_mjesec = []
 	rez_temp3 = []
 	while (i < br):
@@ -117,8 +116,8 @@ def izlaz(korisnik):
 					a = izracun2(objects2, rn.prim, rn.druge, rn.sms, rn.mms, rn.net, x, y)
 					b = format(round(a, 2), '.2f')
 					b_tarifa = data[x]['tarife'][y]['ime_tarife']
-					rez_mreza.append(data[x]['mreza'])
-					rez_temp2 = (b_tarifa, b)
+					rez_mreza = (data[x]['mreza'])
+					rez_temp2 = (rez_mreza, b_tarifa, b)
 					rez_temp3.append(rez_temp2)
 					len_broj += 1
 				rez_temp4.append((rez_temp3))
@@ -129,4 +128,4 @@ def izlaz(korisnik):
 		i += 1
 	len_br = (len(data)+1)*3
 	json_data.close()
-	return (rez, rez_mjesec, rez_mreza, len_br, br_racuna)
+	return (rez, rez_mjesec, len_br, br_racuna)
