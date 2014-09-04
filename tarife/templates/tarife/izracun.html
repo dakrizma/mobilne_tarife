@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block content %}
+<ol>
+	<p>
+	{% for i in rez %}
+	{{ i }} -
+		{% if forloop.counter|divisibleby:3 %}
+		kn
+		</p>
+		<p>
+		{% endif %}
+	{% endfor %}
+	</p>
+</ol>
+{% endblock content %}
