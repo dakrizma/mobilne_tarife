@@ -27,13 +27,12 @@ def index(request):
 			data = []
 			json_data = open('remote_server_simulation/data.json')
 			data = json.load(json_data)
-			objects = Racun.objects.all() 
-			br = len(objects)-1
+			br = len(Racun.objects.all())-1
 
 			# i = 0
 			# while (i < br):
-			# 	if (racun.korisnik == objects[i].korisnik):
-			rn = objects[br]
+			# 	if (racun.korisnik == Racun.objects.all()[i].korisnik):
+			rn = Racun.objects.all()[br]
 			# 	else:
 					
 			# if korisnik, mjesec, godina:

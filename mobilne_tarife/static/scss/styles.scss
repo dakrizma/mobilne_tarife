@@ -157,12 +157,9 @@ p.test {
 }
 
 .footer_bottom {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: relative;
     display: block;
-    margin: 0;
+    margin: 200px 0 0;
     padding: 10px;
     height: 30px;
     background: rgba(0,0,0, 0.333);
@@ -310,4 +307,23 @@ p.test {
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d5d5d5', endColorstr='#d5d5d5',GradientType=1 );
         }
     }
+}
+
+select, input {
+    position: relative;
+    display: block;
+    height: 25px;
+    width: 80%;
+    margin: 0 auto;
+    padding: 2px 2px 2px 5px;
+    @include border-radius(3px);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    @include font-size(13);
+    color: #555;
+    text-align: center;
+}
+
+/* prebrikat */
+.helptext {
+    display: none;
 }

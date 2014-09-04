@@ -15,7 +15,7 @@
     <meta name="description" content="Aplikacija za izračun cijene koštanja usluga mobilnih operatera">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/styles.css">
-    <script src="js/libs/modernizr-2.8.2.min.js"></script>
+    <script src="{{ STATIC_URL }}js/libs/modernizr-2.8.2.min.js"></script>
     {% block extra_head %}{% endblock extra_head %}
 </head>
 
@@ -65,14 +65,14 @@
     </footer>
 
     {# Scripts #}
-    <script src="js/libs/jquery-2.1.1.min.js"></script>
+    <script src="{{ STATIC_URL }}js/libs/jquery-2.1.1.min.js"></script>
 
     <!--[if lt IE 9]>
-		<script src="js/libs/jquery-1.11.1.min.js"><\/script>
+		<script src="{{ STATIC_URL }}js/libs/jquery-1.11.1.min.js"><\/script>
 	<![endif]-->
 
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
+    <script src="{{ STATIC_URL }}js/plugins.js"></script>
+    <script src="{{ STATIC_URL }}js/main.js"></script>
 
 </body>
 
