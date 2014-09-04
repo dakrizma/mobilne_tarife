@@ -15,18 +15,28 @@
     <meta name="description" content="Aplikacija za izračun cijene koštanja usluga mobilnih operatera">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/styles.css">
+    {# Scripts #}
     <script src="{{ STATIC_URL }}js/libs/modernizr-2.8.2.min.js"></script>
+    <script src="{{ STATIC_URL }}js/libs/jquery-2.1.1.min.js"></script>
+    <script src="{{ STATIC_URL }}js/libs/highcharts/highcharts.js"></script>
+    <script src="{{ STATIC_URL }}js/libs/highcharts/modules/data.js"></script>
+    <script src="{{ STATIC_URL }}js/libs/highcharts/modules/drilldown.js"></script>
+    <!--[if lt IE 9]>
+        <script src="{{ STATIC_URL }}js/libs/jquery-1.11.1.min.js"><\/script>
+    <![endif]-->
+    <script src="{{ STATIC_URL }}js/plugins.js"></script>
+    <script src="{{ STATIC_URL }}js/main.js"></script>
     {% block extra_head %}{% endblock extra_head %}
 </head>
 
 <body>
 
-    <header class="full_deader">
+    <header class="full_header">
         <div class="container">
             <div class="grid-4 grid-mobile-12">
                 <a href="/" class="logo cf">
                     <img src="{{ STATIC_URL }}img/logo.png" alt="Mobilne tarife" class="logo_img">
-                    <span class="heading">Mobilne tarife 2</span>
+                    <span class="heading">Mobilne tarife</span>
                 </a>
             </div>
             <div class="grid-8 grid-mobile-12">
@@ -51,6 +61,7 @@
 
     {% block content %}{% endblock content %}
 
+    {% block footer %}
     <footer class="footer_bottom">
         <div class="container">
             <div class="grid-12 center">
@@ -63,16 +74,7 @@
             </div>
         </div>
     </footer>
-
-    {# Scripts #}
-    <script src="{{ STATIC_URL }}js/libs/jquery-2.1.1.min.js"></script>
-
-    <!--[if lt IE 9]>
-		<script src="{{ STATIC_URL }}js/libs/jquery-1.11.1.min.js"><\/script>
-	<![endif]-->
-
-    <script src="{{ STATIC_URL }}js/plugins.js"></script>
-    <script src="{{ STATIC_URL }}js/main.js"></script>
+    {% endblock footer %}    
 
 </body>
 

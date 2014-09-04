@@ -25,21 +25,32 @@
 		"pk": 3,
 		"mreza":"Tele2",
 		"tarife": [
-			{"ime_tarife":"Mix 50", "prim_cij":0.99, "druge_cij":0.99, "sms_cij":0.35, "mms_cij":1.99, "net_cij":0.50, "prim":150, "druge":150, "sms":150, "net":250, "uspostava":0.29, "naknada":15.00, "pretplata":50.00}
+			{"ime_tarife":"Mix 50", "prim_cij":0.99, "druge_cij":0.99, "sms_cij":0.35, "mms_cij":1.99, "net_cij":0.50, "prim":150, "druge":150, "sms":150, "net":250, "uspostava":0.29, "naknada":15.00, "pretplata":50.00},
+			{"ime_tarife":"Mix 75", "prim_cij":0.99, "druge_cij":0.99, "sms_cij":0.35, "mms_cij":1.99, "net_cij":0.50, "prim":250, "druge":250, "sms":250, "net":500, "uspostava":0.29, "naknada":15.00, "pretplata":75.00},
+			{"ime_tarife":"Mix 100", "prim_cij":0.99, "druge_cij":0.99, "sms_cij":0.35, "mms_cij":1.99, "net_cij":0.50, "prim":500, "druge":500, "sms":500, "net":1000, "uspostava":0.29, "naknada":15.00, "pretplata":100.00},
+			{"ime_tarife":"Mix 125", "prim_cij":0.99, "druge_cij":0.99, "sms_cij":0.35, "mms_cij":1.99, "net_cij":0.50, "prim":750, "druge":750, "sms":750, "net":1500, "uspostava":0.29, "naknada":15.00, "pretplata":125.00},
+			{"ime_tarife":"Mix 150", "prim_cij":0.99, "druge_cij":0.99, "sms_cij":0.35, "mms_cij":1.99, "net_cij":0.50, "prim":1000, "druge":1000, "sms":1000, "net":2000, "uspostava":0.29, "naknada":15.00, "pretplata":150.00},
+			{"ime_tarife":"Mix 175", "prim_cij":0.99, "druge_cij":0.99, "sms_cij":0.35, "mms_cij":1.99, "net_cij":0.50, "prim":1500, "druge":1500, "sms":1500, "net":2500, "uspostava":0.29, "naknada":15.00, "pretplata":175.00},
+			{"ime_tarife":"Mix 200", "prim_cij":0.99, "druge_cij":0.99, "sms_cij":0.35, "mms_cij":1.99, "net_cij":0.50, "prim":2000, "druge":2000, "sms":1, "net":3000, "uspostava":0.29, "naknada":15.00, "pretplata":200.00},
+			{"ime_tarife":"Mix 300", "prim_cij":0.99, "druge_cij":0.99, "sms_cij":0.35, "mms_cij":1.99, "net_cij":0.50, "prim":3000, "druge":3000, "sms":1, "net":4000, "uspostava":0.29, "naknada":15.00, "pretplata":300.00},
+			{"ime_tarife":"Mix 400", "prim_cij":0.99, "druge_cij":0.99, "sms_cij":0.35, "mms_cij":1.99, "net_cij":0.50, "prim":1, "druge":1, "sms":1, "net":5000, "uspostava":0.29, "naknada":15.00, "pretplata":400.00}
 			]
 	},
 	{
 		"pk": 4,
 		"mreza":"BonBon",
 		"tarife": [
-			{"ime_tarife":"Osnovna", "prim_cij":0.88, "druge_cij":0.88, "sms_cij":0.33, "mms_cij":0.88, "net_cij":0.88, "prim":0, "druge":0, "sms":0, "net":0, "uspostava":0.00, "naknada":15.00, "pretplata":40.00}
+			{"ime_tarife":"Osnovna", "prim_cij":0.88, "druge_cij":0.88, "sms_cij":0.33, "mms_cij":0.88, "net_cij":0.88, "prim":0, "druge":0, "sms":0, "net":0, "uspostava":0.00, "naknada":15.00, "pretplata":40.00},
+			{"ime_tarife":"Mali", "prim_cij":0.88, "druge_cij":0.88, "sms_cij":0.33, "mms_cij":0.88, "net_cij":0.88, "prim":50, "druge":50, "sms":150, "net":120, "uspostava":0.00, "naknada":15.00, "pretplata":30.00},
+			{"ime_tarife":"Srednji", "prim_cij":0.88, "druge_cij":0.88, "sms_cij":0.33, "mms_cij":0.88, "net_cij":0.88, "prim":200, "druge":200, "sms":500, "net":800, "uspostava":0.00, "naknada":15.00, "pretplata":90.00},
+			{"ime_tarife":"Veliki", "prim_cij":0.88, "druge_cij":0.88, "sms_cij":0.33, "mms_cij":0.88, "net_cij":0.88, "prim":700, "druge":500, "sms":1200, "net":2500, "uspostava":0.00, "naknada":15.00, "pretplata":180.00}
 			]
 	},
 	{
 		"pk": 5,
 		"mreza":"Multiplus",
 		"tarife": [
-			{"ime_tarife":"mobile prepaid", "prim_cij":1.00, "druge_cij":0.43, "sms_cij":0.39, "mms_cij":1.29, "net_cij":3.90, "prim":1, "druge":0, "sms":0, "net":0, "uspostava":0.20, "naknada":0.00, "pretplata":0.00}
+			{"ime_tarife":"mobile prepaid", "prim_cij":1.00, "druge_cij":0.43, "sms_cij":0.39, "mms_cij":1.29, "net_cij":3.90, "prim":1, "druge":0, "sms":0, "net":0, "uspostava":0.29, "naknada":0.00, "pretplata":0.00}
 			]
 	},
 	{
@@ -47,6 +58,15 @@
 		"mreza":"Tomato",
 		"tarife": [
 			{"ime_tarife":"Zestoka", "prim_cij":0.49, "druge_cij":0.49, "sms_cij":0.29, "mms_cij":0.70, "net_cij":0.07, "prim":1500, "druge":1500, "sms":1500, "net":1500, "uspostava":0.00, "naknada":15.00, "pretplata":99.00}
+			]
+	},
+	{
+		"pk": 7,
+		"mreza":"24mobi",
+		"tarife": [
+			{"ime_tarife":"Ninja S", "prim_cij":0.99, "druge_cij":0.99, "sms_cij":0.39, "mms_cij":0.99, "net_cij":3.90, "prim":120, "druge":120, "sms":120, "net":120, "uspostava":0.29, "naknada":15.00, "pretplata":18.00},
+			{"ime_tarife":"Ninja M", "prim_cij":0.99, "druge_cij":0.99, "sms_cij":0.39, "mms_cij":0.99, "net_cij":3.90, "prim":240, "druge":240, "sms":240, "net":240, "uspostava":0.29, "naknada":15.00, "pretplata":24.00},
+			{"ime_tarife":"Ninja L", "prim_cij":0.99, "druge_cij":0.99, "sms_cij":0.39, "mms_cij":0.99, "net_cij":3.90, "prim":480, "druge":480, "sms":480, "net":480, "uspostava":0.29, "naknada":15.00, "pretplata":38.00}
 			]
 	}
 ]

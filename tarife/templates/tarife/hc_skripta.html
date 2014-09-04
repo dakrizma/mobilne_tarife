@@ -1,0 +1,99 @@
+<script>
+$(document).ready(function() {
+
+    Highcharts.data({
+        csv: document.getElementById('{{ oznaka }}').innerHTML,
+        itemDelimiter: '###',
+        parsed: function(columns) {
+
+            var operater = {},
+                operaterData = [],
+                tarife = {},
+                cijene = {},
+                drilldownSeries = [];
+
+            columns[1] = $.map(columns[1], function(value) {
+                return value;
+            });
+
+            $.each(columns[0], function(i, name) {
+                var brandOperatera,
+                    tarifaOperatera;
+
+                if (i > 0) {
+                    nameIme = name.split('---')[0];
+                    tarifaOperatera = nameIme.match();
+                    if (tarifaOperatera) {
+                        tarifaOperatera = tarifaOperatera[1];
+                    }
+                    brandOperatera = nameIme.replace(tarifaOperatera, '');
+                    operater[brandOperatera] = columns[1][i];
+
+                    if (tarifaOperatera !== null) {
+                        if (!cijene[brandOperatera]) {
+                            cijene[brandOperatera] = [];
+                        }
+                        cijene[brandOperatera].push([name.split('---')[1], columns[1][i]]);
+                    }
+                }
+            });
+
+            $.each(operater, function(name, y) {
+                operaterData.push({
+                    name: name,
+                    y: y,
+                    drilldown: cijene[name] ? name : null
+                });
+            });
+            $.each(cijene, function(key, value) {
+                drilldownSeries.push({
+                    name: key,
+                    id: key,
+                    data: value
+                });
+            });
+
+            $('.chart_wrap_{{ oznaka }}').highcharts({
+                chart: {
+                    type: 'pie',
+                    style: {
+                        fontFamily: 'sans-serif',
+                    }
+                },
+                title: {
+                    text: ''
+                },
+                subtitle: {
+                    text: ''
+                },
+                plotOptions: {
+                    series: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '<span style="color:#444; font-weight: normal;">{point.name}:<br> {point.y:.2f} kn</span>'
+                        }
+                    }
+                },
+
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> kn<br/>'
+                },
+
+                series: [{
+                    name: 'Operateri',
+                    colorByPoint: true,
+                    data: operaterData
+                }],
+                drilldown: {
+                    series: drilldownSeries
+                },
+                credits: {
+                    enabled: false
+                }
+
+            });
+        }
+    });
+});
+</script>

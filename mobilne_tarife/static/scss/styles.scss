@@ -21,7 +21,7 @@ html {
 body {
     margin: 0;
     padding: 0;
-    background: url('../img/body_bg.jpg') center repeat;
+    background: url('../img/body_bg_dark.jpg') center repeat;
 }
 
 //samo primjer za veličinu fonta :)
@@ -29,18 +29,23 @@ body {
     @include font-size(18); //   1.8em = 18px
 }
 
+.white_bg {
+    background: url('../img/body_bg.jpg') center repeat;
+    @include box-shadow(0 0 7px rgba(0,0,0, 0.15));
+}
+
 p.test {
     font-size: 20px;
 }
 
-.full_deader {
+.full_header {
     position: relative;
     display: block;
     left: 0;
     right: 0;
     margin: 0;
     padding: 10px;
-    background: rgba(0,0,0, 0.333);
+    //background: rgba(0,0,0, 0.333);
 }
 
 .logo {
@@ -142,16 +147,18 @@ p.test {
         @include transition(0.15s);
 
         &.active, &:hover {
-            color: #444;
+            color: #7cb5ec;
+            @include text-shadow(0 1px 1px rgba(0,0,0, 0.65));
         }
     }
 
     .username {
-        color: #056600;
+        color: #7cb5ec;
         cursor: default;
+        @include text-shadow(0 1px 1px rgba(0,0,0, 0.65));
 
         &.active, &:hover {
-            color: #056600;
+            color: #7cb5ec;
         }
     }
 }
@@ -159,10 +166,10 @@ p.test {
 .footer_bottom {
     position: relative;
     display: block;
-    margin: 200px 0 0;
+    margin: 0;
     padding: 10px;
     height: 30px;
-    background: rgba(0,0,0, 0.333);
+    //background: rgba(0,0,0, 0.333);
     overflow: hidden;
 
     .logo_img {
@@ -180,7 +187,7 @@ p.test {
     position: relative;
     display: block;
     width: 290px;
-    margin: 50px auto;
+    margin: 20px auto 50px;
     padding: 5px;
     background: rgba(255,255,255, 0.95);
     @include box-shadow(0 8px 15px -6px rgba(0,0,0, 0.5));
@@ -307,6 +314,49 @@ p.test {
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d5d5d5', endColorstr='#d5d5d5',GradientType=1 );
         }
     }
+
+    ul.errorlist {
+        position: relative;
+        display: block;
+        min-height: 20px;
+        line-height: 20px;
+        list-style: none;
+        margin: 0 0 -5px 0;
+        padding: 0;
+        box-shadow: none;
+
+        &:after {
+            content: " ";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: block;
+            height: 1px;
+            background: rgb(225,225,225);
+            background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2UxZTFlMSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2Q1ZDVkNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlMWUxZTEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+            background: -moz-linear-gradient(left,  rgba(225,225,225,1) 0%, rgba(213,213,213,1) 50%, rgba(225,225,225,1) 100%);
+            background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(225,225,225,1)), color-stop(50%,rgba(213,213,213,1)), color-stop(100%,rgba(225,225,225,1)));
+            background: -webkit-linear-gradient(left,  rgba(225,225,225,1) 0%,rgba(213,213,213,1) 50%,rgba(225,225,225,1) 100%);
+            background: -o-linear-gradient(left,  rgba(225,225,225,1) 0%,rgba(213,213,213,1) 50%,rgba(225,225,225,1) 100%);
+            background: -ms-linear-gradient(left,  rgba(225,225,225,1) 0%,rgba(213,213,213,1) 50%,rgba(225,225,225,1) 100%);
+            background: linear-gradient(to right,  rgba(225,225,225,1) 0%,rgba(213,213,213,1) 50%,rgba(225,225,225,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1e1e1', endColorstr='#e1e1e1',GradientType=1 );
+        }  
+
+        li {
+            position: relative;
+            display: block;
+            margin: 0;
+            padding: 0;
+            min-height: 20px;
+            line-height: 20px;
+            background: transparent;
+            text-align: center;
+            @include font-size(11);
+            color: #f44;
+        }
+    }
 }
 
 select, input {
@@ -323,7 +373,203 @@ select, input {
     text-align: center;
 }
 
+span.errorlist {
+    position: relative;
+    display: block;
+    min-height: 20px;
+    line-height: 20px;
+    list-style: none;
+    margin: 20px 0 0;
+    padding: 0;
+    box-shadow: none;
+    text-align: center;
+    @include font-size(11);
+    color: #e1e1e1;
+}
+
+.error_message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;  //block jQuery toggle
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background: rgba(0,0,0, 0.75);
+    z-index: 9999;
+
+    .wrap {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: block;
+        width: 280px;
+        min-height: 50px;
+        text-align: center;
+        margin: -100px 0 0 -150px;
+        padding: 10px;
+        background: rgba(255,255,255, 0.8);
+        @include font-size(13);
+        color: #333;
+        font-weight: bold;
+        @include box-shadow(0 3px 10px rgba(0,0,0, 0.45));  
+        cursor: pointer;      
+
+        &:hover:after {
+            background: #f33;
+            color: #fff;
+        }
+
+        &:after {
+            content: "X";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            display: block;
+            width: 30px;
+            height: 30px;
+            background: #fff;
+            @include box-shadow(0 0 5px rgba(0,0,0, 0.333));
+            @include border-radius(100%);
+            line-height: 30px;
+            font-weight: bold;
+            @include font-size(16);
+            color: #f33;            
+            @include transition(0.15s);
+        }
+    }
+}
+
+.button_box {
+    position: relative;
+    margin: 20px 0;
+    padding: 0;
+    text-align: center;
+
+    .main_button {
+        position: relative;
+        display: inline-block;
+        height: 30px;
+        line-height: 30px;
+        margin: 10px 0;
+        padding: 0 10px;
+        @include font-size(13);
+        color: #f3e3e3;
+        background: rgba(0,0,0, 0.75);
+        @include border-radius(4px);
+        text-decoration: none;
+        font-weight: bold;
+        @include transition(0.15s);
+
+        &:hover {
+            color: #fff;
+            background: rgba(0,0,0, 0.6);
+        }
+    }
+}
+
+.errorlist {
+    position: relative;
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        position: relative;
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+
+
+/* highcharts */
+.pie_box {
+    position: relative;
+    display: block;
+    height: auto;
+    margin: 20px 0 0;
+    padding: 0 10px 10px;
+    background: rgba(0,0,0, 0.333);
+    @include box-shadow(0 0 7px rgba(0,0,0, 0.45));
+
+    .title {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 40px;
+        margin: 0;
+        padding: 0;
+        line-height: 40px;
+        @include font-size(18);
+        color: #fff;
+        text-align: center;
+        overflow: hidden;
+        @include text-shadow(0 1px 3px rgba(0,0,0, 0.45));
+    }
+
+    .chart_wrap {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        @include box-shadow(0 0 7px rgba(0,0,0, 0.333));
+    }
+}
+
+.back_button {
+    position: relative;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    margin: 20px 0 0;
+    padding: 0 10px 0 30px;
+    background: rgba(0,0,0, 0.333);
+    @include box-shadow(0 0 7px rgba(0,0,0, 0.45));
+    @include font-size(18);
+    font-family: "Roboto";
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    @include text-shadow(0 1px 3px rgba(0,0,0, 0.45));
+    @include border-radius(15px 0 0 15px);
+    @include transition(0.15s);
+
+    &:hover {
+        padding: 0 10px 0 33px;
+
+        &:after {
+            background: #fff;            
+        }
+    }
+
+    &:after {
+        content: " ";
+        position: absolute;
+        left: 8px;
+        top: 8px;
+        display: block;
+        width: 14px;
+        height: 14px;
+        background: #7cb5ec;
+        @include box-shadow(0 0 7px rgba(0,0,0, 0.45));
+        @include transition(0.15s);
+        @include border-radius(100%);
+    }
+}
+
 /* prebrikat */
 .helptext {
     display: none;
+}
+
+.highcharts-drilldown-data-label text {
+    text-decoration: none !important;
+}
+
+.pb_50 {
+    padding-bottom: 50px;
 }

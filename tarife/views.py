@@ -1,17 +1,20 @@
-from tarife.models import Mreza, Racun
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 from tarife.forms import RacunForm
-from django.shortcuts import render
+from tarife.models import Mreza, Racun
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from django.http import HttpResponseRedirect, HttpResponse
 import json
 
 def register(request):
 	if request.method == 'POST':
 		form = UserCreationForm(request.POST)
 		if form.is_valid():
-			# form.save()
-			return render(request, 'tarife/index.html',)
+			# user = request.user
+			# user.groups.add('korisnici')
+			form.save()
+			return HttpResponseRedirect('/')
 	else:
 		form = UserCreationForm()
 	return render(request, 'tarife/register.html', {'form': form})
@@ -21,49 +24,49 @@ def index(request):
 	if request.method == 'POST':
 		form = RacunForm(request.POST)
 		if form.is_valid():
-			racun = form.save(commit=False)		# snimi u "clipboard", ali nemoj jos snimiti
-			racun.korisnik = request.user		# ovo radimo zato sto moderator je NOT_NULL
-			racun.save()						# snimi
-			data = []
-			json_data = open('remote_server_simulation/data.json')
-			data = json.load(json_data)
-			br = len(Racun.objects.all())-1
-
-			# i = 0
-			# while (i < br):
-			# 	if (racun.korisnik == Racun.objects.all()[i].korisnik):
-			rn = Racun.objects.all()[br]
-			# 	else:
-					
-			# if korisnik, mjesec, godina:
-			# 	unijeli ste podatke za taj mjesec
-
-			mjesec = rn.mjesec
-			godina = rn.godina
-			korisnik = rn.korisnik
-			rez = []
-			for x in range(0, len(data)):
-				for y in range(0, len(data[x]['tarife'])):
-					objects = data[x]['tarife'][y]
-					a = izracun(objects, rn.prim, rn.druge, rn.sms, rn.mms, rn.net, x, y)
-					if y==0:
-						a_min = a
-					if a<=a_min:
-						a_min = a
-						a_rez = format(round(a, 2), '.2f')
-						tarifa = data[x]['tarife'][y]['ime_tarife']
-				rez.append(data[x]['mreza'])
-				rez.append(tarifa)
-				rez.append(a_rez)
-			len_br = len(data)
-			json_data.close()
-			return render(request, 'tarife/izracun.html', {'rez': rez, 'len_br': len_br, 'mjesec': mjesec, 'godina': godina, 'korisnik': korisnik})
+			mjesec = form.cleaned_data['mjesec']
+			godina = form.cleaned_data['godina']
+			k = 0
+			greska = []
+			objects = Racun.objects.all()
+			br = len(objects)
+			while (k < br):
+				if (mjesec == objects[k].mjesec) and (godina == objects[k].godina) and (request.user == objects[k].korisnik):
+					greska.append('Unijeli ste podatke za taj mjesec. Za promjenu podataka kliknite na Promijena podataka ili nastavite sa unosom novog racuna')
+					form = RacunForm()
+					return render(request, 'tarife/index.html', {'form': form, 'greska': greska})
+				k += 1
+			racun = form.save(commit=False)
+			racun.korisnik = request.user
+			racun.save()
+			korisnik = request.user
+			rez, rez_mjesec, rez_mreza, len_br, br_racuna = izlaz(korisnik)
+			return render(request, 'tarife/izracun.html', {'rez': rez, 'rez_mjesec': rez_mjesec, 'rez_mreza': rez_mreza, 'len_br': len_br, 'br_racuna': br_racuna, 'korisnik': korisnik})
 	else:
 		form = RacunForm()
-	
 	return render(request, 'tarife/index.html', {'form': form})
 
-def izracun(objects, br_prim, br_druge, br_sms, br_mms, br_net, x, y):
+@login_required
+def izracun(request):
+	objects = Racun.objects.all()
+	br = len(objects)
+	korisnik = request.user
+	i = 0
+	postoji = 0
+	while (i < br):
+		if (korisnik == objects[i].korisnik):
+			postoji = 1
+		i += 1
+	if (postoji):
+		rez, rez_mjesec, rez_mreza, len_br, br_racuna = izlaz(korisnik)
+		return render(request, 'tarife/izracun.html', {'rez': rez, 'rez_mjesec': rez_mjesec, 'rez_mreza': rez_mreza, 'len_br': len_br, 'br_racuna': br_racuna, 'korisnik': korisnik})
+	else:
+		form = RacunForm()
+		greska = []
+		greska.append('ne postoji ni jedan unos!')
+		return render(request, 'tarife/index.html', {'form': form, 'greska': greska})
+
+def izracun2(objects, br_prim, br_druge, br_sms, br_mms, br_net, x, y):
 	if objects['prim'] + objects['druge'] > 2 and objects['prim'] == objects['druge']:
 		if br_prim + br_druge <= objects['prim']:
 			prim_sum = 0
@@ -90,3 +93,40 @@ def izracun(objects, br_prim, br_druge, br_sms, br_mms, br_net, x, y):
 		net_sum = (br_net-objects['net'])*objects['net_cij']
 	rez = prim_sum + druge_sum + sms_sum + mms_sum + net_sum + objects['pretplata'] + objects['naknada']
 	return rez
+
+def izlaz(korisnik):
+	data = []
+	json_data = open('remote_server_simulation/data.json')
+	data = json.load(json_data)
+	objects = Racun.objects.all()
+	br = len(objects)
+	i = j = br_racuna = len_broj = 0
+	rez = []
+	rez_temp4 = []
+	rez_mreza = []
+	rez_mjesec = []
+	rez_temp3 = []
+	while (i < br):
+		if (korisnik == objects[i].korisnik):
+			rn = objects[i]
+			rez_temp = (objects[i].mjesec, objects[i].godina)
+			rez_mjesec.append(rez_temp)
+			for x in range(0, len(data)):
+				for y in range(0, len(data[x]['tarife'])):
+					objects2 = data[x]['tarife'][y]
+					a = izracun2(objects2, rn.prim, rn.druge, rn.sms, rn.mms, rn.net, x, y)
+					b = format(round(a, 2), '.2f')
+					b_tarifa = data[x]['tarife'][y]['ime_tarife']
+					rez_mreza.append(data[x]['mreza'])
+					rez_temp2 = (b_tarifa, b)
+					rez_temp3.append(rez_temp2)
+					len_broj += 1
+				rez_temp4.append((rez_temp3))
+				rez_temp3 = []
+			rez.append((rez_temp4))
+			rez_temp4 = []
+			br_racuna += 1
+		i += 1
+	len_br = (len(data)+1)*3
+	json_data.close()
+	return (rez, rez_mjesec, rez_mreza, len_br, br_racuna)

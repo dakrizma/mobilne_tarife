@@ -2,20 +2,23 @@
 {% load url from future %}
 
 {% block content %}
-
-	<main>
-		<div class="container">
-			<div class="grid-12">
-				<form class="input_data_form" action="{% url 'index' %}" method="post">{% csrf_token %} {# iz sigurnosnih razloga #}
-					<ul>
-						{{ form.as_ul }}
-					</ul>
-					<input type="submit" value="Izračunaj" />
-				</form>
+<main class="white_bg">
+	<div class="container">
+		<div class="grid-12">
+			<span class="error_message">
+				<span class="wrap">{{ greska }}</span>
+			</span>
+			<div class="button_box">
+				<a class="main_button" href="{% url 'izracun' %}">izračun</a>
+				<a class="main_button" href="{% url 'izracun' %}">promjena podataka</a>
 			</div>
+			<form class="input_data_form" action="{% url 'index' %}" method="post">{% csrf_token %}
+				<ul>
+					{{ form.as_ul }}
+				</ul>
+				<input type="submit" value="Izračunaj" />
+			</form>
 		</div>
-	</main>
-
-
-	
+	</div>
+</main>
 {% endblock content %}

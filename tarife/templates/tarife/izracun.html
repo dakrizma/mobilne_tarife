@@ -1,21 +1,15 @@
 {% extends "master.html" %}
 {% load url from future %}
 
+
 {% block content %}
-<ol>
-	<p>
-	{{ mjesec }}, {{ godina }} </p>
-	<p>
-	{{ korisnik }} </p>
-	<p>
-	{% for i in rez %}
-	{{ i }} -
-		{% if forloop.counter|divisibleby:3 %}
-		kn
-		</p>
-		<p>
-		{% endif %}
-	{% endfor %}
-	</p>
-</ol>
+<main class="white_bg">
+	<div class="container pb_50">
+		<div class="grid-12">
+			<a href="/" class="back_button">Povratak na kalkulator</a>
+		</div>
+		{% include "tarife/charts_data.html" %}
+	</div>
+</main>
+
 {% endblock content %}
