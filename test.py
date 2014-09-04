@@ -8,16 +8,16 @@ def izracun(br_prim, br_druge, br_sms, br_mms, br_net, x, y):
 			prim_sum = 0
 			druge_sum = 0
 		else:
-			druge_sum = prim_sum = (br_prim+br_druge-objects['prim'])*objects['prim_cij']*objects.uspostava
+			druge_sum = prim_sum = (br_prim+br_druge-objects['prim'])*objects['prim_cij']*objects['uspostava']
 	else:
 		if br_prim <= objects['prim'] or objects['prim'] == 1:
 			prim_sum = 0
 		else:
-			prim_sum = (br_prim-objects['prim'])*objects['prim_cij']*objects.uspostava
+			prim_sum = (br_prim-objects['prim'])*objects['prim_cij']*objects['uspostava']
 		if br_druge <= objects['druge'] or objects['druge'] == 1:
 			druge_sum = 0
 		else:
-			druge_sum = (br_druge-objects['druge'])*objects['druge_cij']*objects.uspostava
+			druge_sum = (br_druge-objects['druge'])*objects['druge_cij']*objects['uspostava']
 	if br_sms <= objects['sms'] or objects['sms'] == 1:
 		sms_sum = 0
 	else:
@@ -45,7 +45,7 @@ for x in range(0, len(data)):
 		if a<a_min:
 			a_min = format(round(a, 2), '.2f')
 			tarifa = data[x]['tarife'][y]['ime_tarife']
-	rez.append(data[x]['tarife'])
+	rez.append(data[x]['mreza'])
 	rez.append(tarifa)
 	rez.append(a_min)
 	

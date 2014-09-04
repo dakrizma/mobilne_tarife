@@ -4,6 +4,10 @@
 {% block content %}
 <ol>
 	<p>
+	{{ mjesec }}, {{ godina }} </p>
+	<p>
+	{{ korisnik }} </p>
+	<p>
 	{% for i in rez %}
 	{{ i }} -
 		{% if forloop.counter|divisibleby:3 %}

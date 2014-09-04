@@ -15,9 +15,33 @@ year_dropdown = []
 for y in range(2010, (datetime.datetime.now().year)+1):
 	year_dropdown.append((y, y))
 
-month_dropdown = []
-for m in range(1, 13):
-	month_dropdown.append((m, m))
+sijecanj = 'sijecanj'
+veljaca = 'veljaca'
+ozujak = 'ozujak'
+travanj = 'travanj'
+svibanj = 'svibanj'
+lipanj = 'lipanj'
+srpanj = 'srpanj'
+kolovoz = 'kolovoz'
+rujan = 'rujan'
+listopad = 'listopad'
+studeni = 'studeni'
+prosinac = 'prosinac'
+
+month_dropdown = (
+	(sijecanj, 'sijecanj'),
+	(veljaca, 'veljaca'),
+	(ozujak, 'ozujak'),
+	(travanj, 'travanj'),
+	(svibanj, 'svibanj'),
+	(lipanj, 'lipanj'),
+	(srpanj, 'srpanj'),
+	(kolovoz, 'kolovoz'),
+	(rujan, 'rujan'),
+	(listopad, 'listopad'),
+	(studeni, 'studeni'),
+	(prosinac, 'prosinac'),
+	)
 
 class Racun(models.Model):
 	prim = models.IntegerField()
@@ -25,7 +49,7 @@ class Racun(models.Model):
 	sms = models.IntegerField()
 	mms = models.IntegerField()
 	net = models.IntegerField()
-	mjesec = models.IntegerField(('mjesec'), max_length=2, choices=month_dropdown, default=datetime.datetime.now().month)
+	mjesec = models.CharField(max_length=8, choices=month_dropdown,)
 	godina = models.IntegerField(('godina'), max_length=4, choices=year_dropdown, default=datetime.datetime.now().year)
 	korisnik = models.ForeignKey(User)
 	mreza = models.ForeignKey('Mreza')

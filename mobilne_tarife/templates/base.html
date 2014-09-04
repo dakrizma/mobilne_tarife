@@ -14,7 +14,7 @@
 			{% if user.is_authenticated %}
 				<div id="user-info">{{ user.username }} | <a href="/admin/tarife/tarifa/">tarife</a> | <a href="{% url 'logout' %}">logout</a></div>
 			{% else %}
-				<div id="user-info"><a href="/admin/">login</a></div>
+				<div id="user-info"><a href="{% url 'login' %}">login</a> | <a href="{% url 'register' %}">register</a></div>
 			{% endif %}
 			<div id="site-title"><h1>Mobilne tarife</h1></div>
 		</div>
