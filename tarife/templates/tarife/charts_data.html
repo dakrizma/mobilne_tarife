@@ -1,172 +1,26 @@
-{% comment %}
-
-/////////////////////////////
-OVO JE OD PRIJE 
-/////////////////////////////
-
-<p>{{ korisnik }}</p>
-{% for i in rez %}
-    {{ i }} -
-    {% if forloop.counter|divisibleby:3 %}
-        kn</p><p>
-    {% endif %}
-    {% if forloop.counter|divisibleby:len_br %}
-        <br/><br/>
-    {% endif %}
-{% endfor %}
-</p>
-<p>{{ korisnik }}</p>
-{% for j in rez_svi %}
-    {{ j }} -
-    {% if forloop.counter|divisibleby:3 %}
-        kn</p><p>
-    {% endif %}
-    {% if forloop.counter|divisibleby:len_br2 %}
-        <br/><br/>
-    {% endif %}
-{% endfor %}
-</p>
-{% endcomment %}
-
-
-
-{% comment %}
-////////////////////////////////
-    Tu je primjer za 3 mjeseca (copy/pase su sva tri tak da sam prvi prouči):
-////////////////////////////////
-{% endcomment %}
-
-
-{% comment %}
-    Mjesec 1 - primjer - GODINA, MJESEC i OZNAKA su u "with" da mi radi, to treba izvadit u FOR i za svaki postojeći mjesec okinut čitav taj kod ispod
-{% endcomment %}
-
-<p>
-{{ len_br }}</p><p>
-{{ br_racuna }}</p><p>
-{{ rez }}</p><p>
-{{ rez.0 }}</p><p>
-{{ rez.0.0 }}</p><p>
-{{ rez.0.0.0 }}</p><p>
-{{ rez.0.0.0.1 }}</p><p>
-{{ rez_mjesec }}
-</p>
-
-{% comment %}
-    Uzorak je OPERATER---TARIFA###CIJENA  (vidi dole kak je rješeno)
-
-    BITNO:
-        Najmanja cijena mora biti zadnja
-        NESNIJE BIT RAZMAKA unurat <pre> taga
-{% endcomment %}
-
-{% comment %}
-{% for i in rez_mjesec %}
-    {{ i }}
-{% endcomment %}
-{% for k1 in rez %}{% for k2 in k1 %}{% for k3 in k2 %}{{ k3.0 }}---{{ k3.1 }}###{{ k3.2 }}{% endfor %}{% endfor %}{% endfor %}
-{% comment %}
-{% endfor %}
-{% endcomment %}
-
-
-{% for i in rez_mjesec %}
-    {% with godina=i.1 mjesec=i.0|capfirst oznaka=i.0|join:i.1 %}
-    
+{% spaceless %}
+{% for k1 in rez %}
+    {% for i in rez_mjesec%}
+    {% if forloop.counter == forloop.parentloop.counter %}
+    {% with godina=i.1 mjesec=i.0|capfirst oznaka=i.2 %}
     <div class="grid-6 grid-tablet-12 grid-mobile-12">
     <div class="pie_box cf">
     <h3 class="title">Račun: {{ mjesec }} {{ godina }}.</h3>
     <div class="chart_wrap_{{ oznaka }} chart_wrap"></div>
-    
-    
+                    
     <pre id="{{ oznaka }}" style="display:none">Operater###cijena
-    Vip---Tarifa 1###123.01
-    Vip---Tarifa 2###212.56
-    Vip---Tarifa 3###116.40
-    Vip---Tarifa 5###123.34
-    Vip---Tarifa 4###{{ len_br }}
-    Tele2---Tarifa x###127.73
-    Tele2---Tarifa x###328.01
-    Tele2---Tarifa x###121.13
-    Tele2---Tarifa x###345.09
-    Tele2---Tarifa x###140.26
-    Tele2---Tarifa x###150.25
-    Tele2---Tarifa x###122.24
-    Tele2---Tarifa x###344.18
-    Tele2---Tarifa x###1043.16
-    Tele2---Tarifa x###89.13
-    24mobi---Tarifa 1###785.65
-    24mobi---Tarifa 2###122.56
-    24mobi---Tarifa 5###313.34
-    24mobi---Tarifa 4###73.55
-    24mobi---Tarifa 3###61.40
-    T Mobile---Tarifa x###126.72
-    T Mobile---Tarifa x###124.72
-    T Mobile---Tarifa x###122.16
-    T Mobile---Tarifa x###121.87
-    T Mobile---Tarifa x###126.90
-    T Mobile---Tarifa x###123.65
-    T Mobile---Tarifa x###432.50
-    T Mobile---Tarifa x###121.36
-    T Mobile---Tarifa x###122.36
-    T Mobile---Tarifa x###67.09
-    T Mobile---Tarifa x###46.55</pre>
-    
+    {% for k2 in k1 %}
+        {% for k3 in k2 %}
+        {{ k3.0 }}---{{ k3.1 }}###{{ k3.2 }}
+        {% endfor %}
+    {% endfor %}
+    </pre>
+
     {% include "tarife/hc_skripta.html" %}
-    
     </div>
     </div>
-    
     {% endwith %}
+    {% endif %}
+    {% endfor %}
 {% endfor %}
-
-
-
-
-{% with godina="2014" mjesec="2" oznaka="2014_2" %}
-
-<div class="grid-6 grid-tablet-12 grid-mobile-12">
-<div class="pie_box cf">
-<h3 class="title">Račun za - {{ mjesec }}.{{ godina }}</h3>
-<div class="chart_wrap_{{ oznaka }} chart_wrap"></div>
-
-
-<pre id="{{ oznaka }}" style="display:none">Operater###cijena
-Vip---Tarifa 1###123.01
-Vip---Tarifa 2###212.56
-Vip---Tarifa 3###116.40
-Vip---Tarifa 5###123.34
-Vip---Tarifa 4###{{ len_br }}
-Tele2---Tarifa x###127.73
-Tele2---Tarifa x###328.01
-Tele2---Tarifa x###121.13
-Tele2---Tarifa x###345.09
-Tele2---Tarifa x###140.26
-Tele2---Tarifa x###150.25
-Tele2---Tarifa x###122.24
-Tele2---Tarifa x###344.18
-Tele2---Tarifa x###1043.16
-Tele2---Tarifa x###89.13
-24mobi---Tarifa 1###785.65
-24mobi---Tarifa 2###122.56
-24mobi---Tarifa 5###313.34
-24mobi---Tarifa 4###73.55
-24mobi---Tarifa 3###61.40
-T Mobile---Tarifa x###126.72
-T Mobile---Tarifa x###124.72
-T Mobile---Tarifa x###122.16
-T Mobile---Tarifa x###121.87
-T Mobile---Tarifa x###126.90
-T Mobile---Tarifa x###123.65
-T Mobile---Tarifa x###432.50
-T Mobile---Tarifa x###121.36
-T Mobile---Tarifa x###122.36
-T Mobile---Tarifa x###67.09
-T Mobile---Tarifa x###46.55</pre>
-
-{% include "tarife/hc_skripta.html" %}
-
-    </div>
-</div>
-
-{% endwith %}
+{% endspaceless %}

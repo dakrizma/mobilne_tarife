@@ -11,8 +11,6 @@ def register(request):
 	if request.method == 'POST':
 		form = UserCreationForm(request.POST)
 		if form.is_valid():
-			# user = request.user
-			# user.groups.add('korisnici')
 			form.save()
 			return HttpResponseRedirect('/')
 	else:
@@ -40,8 +38,8 @@ def index(request):
 			racun.korisnik = request.user
 			racun.save()
 			korisnik = request.user
-			rez, rez_mjesec, len_br, br_racuna = izlaz(korisnik)
-			return render(request, 'tarife/izracun.html', {'rez': rez, 'rez_mjesec': rez_mjesec, 'len_br': len_br, 'br_racuna': br_racuna, 'korisnik': korisnik})
+			rez, rez_mjesec = izlaz(korisnik)
+			return render(request, 'tarife/izracun.html', {'rez': rez, 'rez_mjesec': rez_mjesec})
 	else:
 		form = RacunForm()
 	return render(request, 'tarife/index.html', {'form': form})
@@ -58,8 +56,8 @@ def izracun(request):
 			postoji = 1
 		i += 1
 	if (postoji):
-		rez, rez_mjesec, len_br, br_racuna = izlaz(korisnik)
-		return render(request, 'tarife/izracun.html', {'rez': rez, 'rez_mjesec': rez_mjesec, 'len_br': len_br, 'br_racuna': br_racuna, 'korisnik': korisnik})
+		rez, rez_mjesec = izlaz(korisnik)
+		return render(request, 'tarife/izracun.html', {'rez': rez, 'rez_mjesec': rez_mjesec})
 	else:
 		form = RacunForm()
 		greska = []
@@ -100,32 +98,68 @@ def izlaz(korisnik):
 	data = json.load(json_data)
 	objects = Racun.objects.all()
 	br = len(objects)
-	i = j = br_racuna = len_broj = 0
+	i = j = 0
 	rez = []
 	rez_temp4 = []
-	rez_mjesec = []
+	rez_mjesec3 = []
 	rez_temp3 = []
+	rez_temp33 = []
+	rez2 = []
 	while (i < br):
 		if (korisnik == objects[i].korisnik):
 			rn = objects[i]
-			rez_temp = (objects[i].mjesec, objects[i].godina)
-			rez_mjesec.append(rez_temp)
+			rez_mjesec2 = mj_god(rn.mjesec, rn.godina)
+			rez_temp = (rn.mjesec, rn.godina, rez_mjesec2)
+			rez_mjesec3.append(rez_temp)
+			rez_temp4 = [rez_mjesec2]
+			rez_mjesec = []
 			for x in range(0, len(data)):
 				for y in range(0, len(data[x]['tarife'])):
 					objects2 = data[x]['tarife'][y]
 					a = izracun2(objects2, rn.prim, rn.druge, rn.sms, rn.mms, rn.net, x, y)
-					b = format(round(a, 2), '.2f')
-					b_tarifa = data[x]['tarife'][y]['ime_tarife']
+					a_tarifa = data[x]['tarife'][y]['ime_tarife']
 					rez_mreza = (data[x]['mreza'])
-					rez_temp2 = (rez_mreza, b_tarifa, b)
+					rez_temp2 = (rez_mreza, a_tarifa, a)
 					rez_temp3.append(rez_temp2)
-					len_broj += 1
-				rez_temp4.append((rez_temp3))
+				rez_temp33 = sorted(rez_temp3, key=lambda cijena: cijena[2], reverse=True)
+				rez_temp4.append(rez_temp33)
+				rez_temp33 = []
 				rez_temp3 = []
-			rez.append((rez_temp4))
+			rez.append(rez_temp4)
 			rez_temp4 = []
-			br_racuna += 1
 		i += 1
-	len_br = (len(data)+1)*3
+	rez2 = sorted(rez, key=lambda mj_gd: mj_gd[0])
+	for x in range(0, len(rez2)):
+		del rez2[x][0]
+	rez_mjesec = sorted(rez_mjesec3, key=lambda mj_god: mj_god[2])
 	json_data.close()
-	return (rez, rez_mjesec, len_br, br_racuna)
+	return (rez2, rez_mjesec)
+
+def mj_god(mjesec, godina):
+	god = mj = 0
+	god = int(godina) * 100
+	if (mjesec == 'siječanj'):
+		mj = 1
+	if (mjesec == 'veljača'):
+		mj = 2
+	if (mjesec == 'ožujak'):
+		mj = 3
+	if (mjesec == 'travanj'):
+		mj = 4
+	if (mjesec == 'svibanj'):
+		mj = 5
+	if (mjesec == 'lipanj'):
+		mj = 6
+	if (mjesec == 'srpanj'):
+		mj = 7
+	if (mjesec == 'kolovoz'):
+		mj = 8
+	if (mjesec == 'rujan'):
+		mj = 9
+	if (mjesec == 'listopad'):
+		mj = 10
+	if (mjesec == 'studeni'):
+		mj = 11
+	if (mjesec == 'prosinac'):
+		mj = 12
+	return(god + mj)

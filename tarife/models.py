@@ -15,32 +15,19 @@ year_dropdown = []
 for y in range(2010, (datetime.datetime.now().year)+1):
 	year_dropdown.append((y, y))
 
-sijecanj = 'sijecanj'
-veljaca = 'veljaca'
-ozujak = 'ozujak'
-travanj = 'travanj'
-svibanj = 'svibanj'
-lipanj = 'lipanj'
-srpanj = 'srpanj'
-kolovoz = 'kolovoz'
-rujan = 'rujan'
-listopad = 'listopad'
-studeni = 'studeni'
-prosinac = 'prosinac'
-
 month_dropdown = (
-	(sijecanj, 'sijecanj'),
-	(veljaca, 'veljaca'),
-	(ozujak, 'ozujak'),
-	(travanj, 'travanj'),
-	(svibanj, 'svibanj'),
-	(lipanj, 'lipanj'),
-	(srpanj, 'srpanj'),
-	(kolovoz, 'kolovoz'),
-	(rujan, 'rujan'),
-	(listopad, 'listopad'),
-	(studeni, 'studeni'),
-	(prosinac, 'prosinac'),
+	('siječanj', 'siječanj'),
+	('veljača', 'veljača'),
+	('ožujak', 'ožujak'),
+	('travanj', 'travanj'),
+	('svibanj', 'svibanj'),
+	('lipanj', 'lipanj'),
+	('srpanj', 'srpanj'),
+	('kolovoz', 'kolovoz'),
+	('rujan', 'rujan'),
+	('listopad', 'listopad'),
+	('studeni', 'studeni'),
+	('prosinac', 'prosinac'),
 	)
 
 class Racun(models.Model):
