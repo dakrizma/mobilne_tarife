@@ -1,4 +1,5 @@
-from tarife.forms import RacunForm
+# -*- coding: utf-8 -*-
+from tarife.forms import RacunForm, BrisanjeForm
 from tarife.models import Mreza, Racun
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
@@ -25,14 +26,13 @@ def index(request):
 			mjesec = form.cleaned_data['mjesec']
 			godina = form.cleaned_data['godina']
 			k = 0
-			greska = []
 			objects = Racun.objects.all()
 			br = len(objects)
 			while (k < br):
 				if (mjesec == objects[k].mjesec) and (godina == objects[k].godina) and (request.user == objects[k].korisnik):
-					greska.append('Unijeli ste podatke za taj mjesec. Za promjenu podataka kliknite na Promijena podataka ili nastavite sa unosom novog racuna')
+					poruka = 'Unijeli ste podatke za taj mjesec. Za brisanje računa kliknite na \'brisanje računa\' ili nastavite sa unosom novog računa'
 					form = RacunForm()
-					return render(request, 'tarife/index.html', {'form': form, 'greska': greska})
+					return render(request, 'tarife/index.html', {'form': form, 'poruka': poruka})
 				k += 1
 			racun = form.save(commit=False)
 			racun.korisnik = request.user
@@ -49,20 +49,44 @@ def izracun(request):
 	objects = Racun.objects.all()
 	br = len(objects)
 	korisnik = request.user
-	i = 0
-	postoji = 0
-	while (i < br):
-		if (korisnik == objects[i].korisnik):
+	k = postoji = 0
+	while (k < br):
+		if (korisnik == objects[k].korisnik):
 			postoji = 1
-		i += 1
+		k += 1
 	if (postoji):
 		rez, rez_mjesec = izlaz(korisnik)
 		return render(request, 'tarife/izracun.html', {'rez': rez, 'rez_mjesec': rez_mjesec})
 	else:
 		form = RacunForm()
-		greska = []
-		greska.append('ne postoji ni jedan unos!')
-		return render(request, 'tarife/index.html', {'form': form, 'greska': greska})
+		poruka = []
+		poruka.append('ne postoji ni jedan unos!')
+		return render(request, 'tarife/index.html', {'form': form, 'poruka': poruka})
+
+@login_required
+def brisanje(request):
+	if request.method == 'POST':
+		form = BrisanjeForm(request.POST)
+		if form.is_valid():
+			mjesec = form['mjesec'].value()
+			god = form['godina'].value()
+			godina = int(god)
+			k = 0
+			objects = Racun.objects.all()
+			br = len(objects)
+			while (k < br):
+				form = BrisanjeForm()
+				if (mjesec == objects[k].mjesec) and (godina == objects[k].godina) and (request.user == objects[k].korisnik):
+					objects[k].delete()
+					poruka = 'Račun obrisan!'
+					return render(request, 'tarife/brisanje.html', {'form': form, 'poruka': poruka})
+				else:
+					poruka = 'Pokušavate obrisati nepostojeći račun'
+				k += 1
+			return render(request, 'tarife/brisanje.html', {'form': form, 'poruka': poruka})
+	else:
+		form = BrisanjeForm()
+	return render(request, 'tarife/brisanje.html', {'form': form})
 
 def izracun2(objects, br_prim, br_druge, br_sms, br_mms, br_net, x, y):
 	if objects['prim'] + objects['druge'] > 2 and objects['prim'] == objects['druge']:
@@ -100,11 +124,11 @@ def izlaz(korisnik):
 	br = len(objects)
 	i = j = 0
 	rez = []
-	rez_temp4 = []
-	rez_mjesec3 = []
-	rez_temp3 = []
-	rez_temp33 = []
 	rez2 = []
+	rez_temp3 = []
+	rez_temp4 = []
+	rez_temp5 = []
+	rez_mjesec3 = []
 	while (i < br):
 		if (korisnik == objects[i].korisnik):
 			rn = objects[i]
@@ -121,9 +145,9 @@ def izlaz(korisnik):
 					rez_mreza = (data[x]['mreza'])
 					rez_temp2 = (rez_mreza, a_tarifa, a)
 					rez_temp3.append(rez_temp2)
-				rez_temp33 = sorted(rez_temp3, key=lambda cijena: cijena[2], reverse=True)
-				rez_temp4.append(rez_temp33)
-				rez_temp33 = []
+				rez_temp5 = sorted(rez_temp3, key=lambda cijena: cijena[2], reverse=True)
+				rez_temp4.append(rez_temp5)
+				rez_temp5 = []
 				rez_temp3 = []
 			rez.append(rez_temp4)
 			rez_temp4 = []
@@ -138,11 +162,11 @@ def izlaz(korisnik):
 def mj_god(mjesec, godina):
 	god = mj = 0
 	god = int(godina) * 100
-	if (mjesec == 'siječanj'):
+	if (mjesec == u'siječanj'):
 		mj = 1
-	if (mjesec == 'veljača'):
+	if (mjesec == u'veljača'):
 		mj = 2
-	if (mjesec == 'ožujak'):
+	if (mjesec == u'ožujak'):
 		mj = 3
 	if (mjesec == 'travanj'):
 		mj = 4

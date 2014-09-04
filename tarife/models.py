@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.db import models
 from django.contrib.auth.models import User
 import datetime
@@ -5,7 +7,7 @@ import datetime
 class Mreza(models.Model):
 	ime_mreze = models.CharField(max_length=50)
 
-	def __str__(self):
+	def __unicode__(self):
 		return self.ime_mreze
 
 	class Meta:
@@ -16,9 +18,9 @@ for y in range(2010, (datetime.datetime.now().year)+1):
 	year_dropdown.append((y, y))
 
 month_dropdown = (
-	('siječanj', 'siječanj'),
-	('veljača', 'veljača'),
-	('ožujak', 'ožujak'),
+	(u'siječanj', u'siječanj'),
+	(u'veljača', u'veljača'),
+	(u'ožujak', u'ožujak'),
 	('travanj', 'travanj'),
 	('svibanj', 'svibanj'),
 	('lipanj', 'lipanj'),

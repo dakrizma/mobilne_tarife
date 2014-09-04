@@ -6,11 +6,11 @@
 	<div class="container">
 		<div class="grid-12">
 			<span class="error_message">
-				<span class="wrap">{{ greska }}</span>
+				<span class="wrap">{{ poruka }}</span>
 			</span>
 			<div class="button_box">
-				<a class="main_button" href="{% url 'izracun' %}">izračun</a>
-				<a class="main_button" href="{% url 'izracun' %}">promjena podataka</a>
+				<a class="main_button" href="{% url 'izracun' %}">izračun unesenih računa</a>
+				<a class="main_button" href="{% url 'brisanje' %}">brisanje računa</a>
 			</div>
 			<form class="input_data_form" action="{% url 'index' %}" method="post">{% csrf_token %}
 				<ul>
