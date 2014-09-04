@@ -21,6 +21,31 @@ class RacunForm(ModelForm):
 			}
         exclude = ('korisnik',)
 
+# class polje_godina(ModelChoiceField):
+# 	def label_from_instance(self, obj):
+# 		return obj.godina
+
+# class polje_mjesec(ModelChoiceField):
+# 	def label_from_instance(self, obj):
+# 		return obj.mjesec
+
+# class BrisanjeForm(forms.Form):
+
+# 	# mjesec = forms.CharField(label='mjesec', max_length=10)
+# 	# godina = forms.IntegerField(label='godina')
+
+# 	# korisnik1 = forms.ModelForeignKey(Racun.objects.all())
+# 	# korisnik2 = forms.ModelChoiceField(queryset=Racun.objects.values_list('korisnik'))
+	
+# 	# mjesec = polje_mjesec(queryset=Racun.objects.all())
+# 	# godina = polje_godina(queryset=Racun.objects.all())
+
+	# mjesec = forms.ModelChoiceField(queryset=Racun.objects.values_list('mjesec'))
+	# godina = forms.ModelChoiceField(queryset=Racun.objects.values_list('godina'))
+	# godina = polje_godina(queryset=Racun.objects.all())
+
+
+
 class BrisanjeForm(ModelForm):
     class Meta:
         model = Racun

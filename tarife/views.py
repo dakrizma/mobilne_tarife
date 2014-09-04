@@ -30,9 +30,9 @@ def index(request):
 			br = len(objects)
 			while (k < br):
 				if (mjesec == objects[k].mjesec) and (godina == objects[k].godina) and (request.user == objects[k].korisnik):
-					poruka = 'Unijeli ste podatke za taj mjesec. Za brisanje računa kliknite na \'brisanje računa\' ili nastavite sa unosom novog računa'
+					greska = 'Unijeli ste podatke za taj mjesec. Za brisanje računa kliknite na \'brisanje računa\' ili nastavite sa unosom novog računa'
 					form = RacunForm()
-					return render(request, 'tarife/index.html', {'form': form, 'poruka': poruka})
+					return render(request, 'tarife/index.html', {'form': form, 'greska': greska})
 				k += 1
 			racun = form.save(commit=False)
 			racun.korisnik = request.user
@@ -49,25 +49,28 @@ def izracun(request):
 	objects = Racun.objects.all()
 	br = len(objects)
 	korisnik = request.user
-	k = postoji = 0
-	while (k < br):
-		if (korisnik == objects[k].korisnik):
+	i = 0
+	postoji = 0
+	while (i < br):
+		if (korisnik == objects[i].korisnik):
 			postoji = 1
-		k += 1
+		i += 1
 	if (postoji):
 		rez, rez_mjesec = izlaz(korisnik)
 		return render(request, 'tarife/izracun.html', {'rez': rez, 'rez_mjesec': rez_mjesec})
 	else:
 		form = RacunForm()
-		poruka = []
-		poruka.append('ne postoji ni jedan unos!')
-		return render(request, 'tarife/index.html', {'form': form, 'poruka': poruka})
+		greska = []
+		greska.append('ne postoji ni jedan unos!')
+		return render(request, 'tarife/index.html', {'form': form, 'greska': greska})
 
 @login_required
 def brisanje(request):
 	if request.method == 'POST':
 		form = BrisanjeForm(request.POST)
 		if form.is_valid():
+			# form.fields['mjesec'].queryset = Racun.objects.filter(korisnik=request.user)
+			# form.fields['godina'].queryset = Racun.objects.filter(korisnik=request.user)
 			mjesec = form['mjesec'].value()
 			god = form['godina'].value()
 			godina = int(god)
@@ -118,17 +121,17 @@ def izracun2(objects, br_prim, br_druge, br_sms, br_mms, br_net, x, y):
 
 def izlaz(korisnik):
 	data = []
-	json_data = open('remote_server_simulation/data.json')
+	json_data = open('remote_server_simulation/data.json')		# treba staviti exeption ako ne postoji
 	data = json.load(json_data)
 	objects = Racun.objects.all()
 	br = len(objects)
 	i = j = 0
 	rez = []
-	rez2 = []
-	rez_temp3 = []
 	rez_temp4 = []
-	rez_temp5 = []
 	rez_mjesec3 = []
+	rez_temp3 = []
+	rez_temp33 = []
+	rez2 = []
 	while (i < br):
 		if (korisnik == objects[i].korisnik):
 			rn = objects[i]
@@ -145,9 +148,9 @@ def izlaz(korisnik):
 					rez_mreza = (data[x]['mreza'])
 					rez_temp2 = (rez_mreza, a_tarifa, a)
 					rez_temp3.append(rez_temp2)
-				rez_temp5 = sorted(rez_temp3, key=lambda cijena: cijena[2], reverse=True)
-				rez_temp4.append(rez_temp5)
-				rez_temp5 = []
+				rez_temp33 = sorted(rez_temp3, key=lambda cijena: cijena[2], reverse=True)
+				rez_temp4.append(rez_temp33)
+				rez_temp33 = []
 				rez_temp3 = []
 			rez.append(rez_temp4)
 			rez_temp4 = []
