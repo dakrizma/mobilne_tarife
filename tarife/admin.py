@@ -1,12 +1,11 @@
 from django.contrib import admin
-from tarife.models import Mreza, Tarifa
+from tarife.models import Mreza, Racun
 
 class MrezaAdmin(admin.ModelAdmin):
 	list_display = ('id', 'ime_mreze')
 
-class TarifaAdmin(admin.ModelAdmin):
-	list_display = ('id', 'ime_tarife', 'prim_cij', 'druge_cij', 'sms_cij', 'mms_cij', 'net_cij', 'prim', 'druge', 'sms', 'mms', 'net', 'uspostava', 'naknada', 'pretplata','mreza')
-	list_filter = ('mreza',)
+class RacunAdmin(admin.ModelAdmin):
+	list_display = ('id', 'mjesec', 'godina')
 
 admin.site.register(Mreza, MrezaAdmin)
-admin.site.register(Tarifa, TarifaAdmin)
+admin.site.register(Racun, RacunAdmin)

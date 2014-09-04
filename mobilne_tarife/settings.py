@@ -55,7 +55,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tarife',
-    'j_son',
 )
 
 MIDDLEWARE_CLASSES = (

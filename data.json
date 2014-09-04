@@ -1,0 +1,52 @@
+[
+	{
+		"pk": 1,
+		"mreza":"vip",
+		"tarife": [
+			{"ime_tarife":"Bez Granica S", "prim_cij":"0.99", "druge_cij":"0.99", "sms_cij":"0.40", "mms_cij":"1.99", "net_cij":"0.04", "prim":"1", "druge":"0", "sms":"0", "net":"512", "uspostava":"0.00", "naknada":"15.00", "pretplata":"75.00"},
+			{"ime_tarife":"Bez Granica M", "prim_cij":"0.00", "druge_cij":"0.99", "sms_cij":"0.40", "mms_cij":"1.99", "net_cij":"0.04", "prim":"1", "druge":"100", "sms":"0", "net":"1000", "uspostava":"0.00", "naknada":"15.00", "pretplata":"125.00"},
+			{"ime_tarife":"Bez Granica L", "prim_cij":"0.00", "druge_cij":"0.00", "sms_cij":"0.00", "mms_cij":"1.99", "net_cij":"0.04", "prim":"1", "druge":"1", "sms":"1", "net":"2000", "uspostava":"0.00", "naknada":"15.00", "pretplata":"220.00"},
+			{"ime_tarife":"Bez Granica XL", "prim_cij":"0.00", "druge_cij":"0.00", "sms_cij":"0.00", "mms_cij":"1.99", "net_cij":"0.04", "prim":"1", "druge":"1", "sms":"1", "net":"3000", "uspostava":"0.00", "naknada":"15.00", "pretplata":"400.00"},
+			{"ime_tarife":"Bez Granica XXL", "prim_cij":"0.00", "druge_cij":"0.00", "sms_cij":"0.00", "mms_cij":"1.99", "net_cij":"0.04", "prim":"1", "druge":"1", "sms":"1", "net":"5000", "uspostava":"0.00", "naknada":"15.00", "pretplata":"600.00"}
+			]
+	},
+	{
+		"pk": 2,
+		"mreza":"T-Mobile",
+		"tarife": [
+			{"ime_tarife":"S", "prim_cij":"1.01", "druge_cij":"1.01", "sms_cij":"0.40", "mms_cij":"2.03", "net_cij":"0.20", "prim":"150", "druge":"150", "sms":"100", "net":"0", "uspostava":"0.29", "naknada":"15.00", "pretplata":"55.00"},
+			{"ime_tarife":"M", "prim_cij":"1.01", "druge_cij":"1.01", "sms_cij":"0.40", "mms_cij":"2.03", "net_cij":"0.20", "prim":"200", "druge":"200", "sms":"200", "net":"250", "uspostava":"0.29", "naknada":"15.00", "pretplata":"95.00"},
+			{"ime_tarife":"L", "prim_cij":"0.00", "druge_cij":"1.01", "sms_cij":"0.40", "mms_cij":"2.03", "net_cij":"0.20", "prim":"1", "druge":"200", "sms":"200", "net":"1000", "uspostava":"0.00", "naknada":"15.00", "pretplata":"165.00"},
+			{"ime_tarife":"XL", "prim_cij":"0.00", "druge_cij":"1.01", "sms_cij":"0.40", "mms_cij":"2.03", "net_cij":"0.20", "prim":"1", "druge":"500", "sms":"500", "net":"2000", "uspostava":"0.00", "naknada":"15.00", "pretplata":"225.00"},
+			{"ime_tarife":"XXL", "prim_cij":"0.00", "druge_cij":"1.01", "sms_cij":"0.40", "mms_cij":"2.03", "net_cij":"0.20", "prim":"1", "druge":"5000", "sms":"1", "net":"5000", "uspostava":"0.00", "naknada":"15.00", "pretplata":"425.00"}
+			]
+	},
+	{
+		"pk": 3,
+		"mreza":"Tele2",
+		"tarife": [
+			{"ime_tarife":"Mix 50", "prim_cij":"0.99", "druge_cij":"0.99", "sms_cij":"0.35", "mms_cij":"1.99", "net_cij":"0.50", "prim":"150", "druge":"150", "sms":"150", "net":"250", "uspostava":"0.29", "naknada":"15.00", "pretplata":"50.00"}
+			]
+	},
+	{
+		"pk": 4,
+		"mreza":"BonBon",
+		"tarife": [
+			{"ime_tarife":"Osnovna", "prim_cij":"0.88", "druge_cij":"0.88", "sms_cij":"0.33", "mms_cij":"0.88", "net_cij":"0.88", "prim":"0", "druge":"0", "sms":"0", "net":"0", "uspostava":"0.00", "naknada":"15.00", "pretplata":"40.00"}
+			]
+	},
+	{
+		"pk": 5,
+		"mreza": "Multiplus",
+		"tarife": [
+			{"ime_tarife":"mobile prepaid", "prim_cij":"1.00", "druge_cij":"0.43", "sms_cij":"0.39", "mms_cij":"1.29", "net_cij":"3.90", "prim":"1", "druge":"0", "sms":"0", "net":"0", "uspostava":"0.20", "naknada":"0.00", "pretplata":"0.00"}
+			]
+	},
+	{
+		"pk": 6,
+		"mreza":"Tomato",
+		"tarife": [
+			{"ime_tarife":"Zestoka", "prim_cij":"0.49", "druge_cij":"0.49", "sms_cij":"0.29", "mms_cij":"0.70", "net_cij":"0.07", "prim":"1500", "druge":"1500", "sms":"1500", "net":"1500", "uspostava":"0.00", "naknada":"15.00", "pretplata":"99.00"}
+			]
+	}
+]

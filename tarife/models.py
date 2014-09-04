@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+import datetime
 	
 class Mreza(models.Model):
 	ime_mreze = models.CharField(max_length=50)
@@ -9,25 +11,24 @@ class Mreza(models.Model):
 	class Meta:
 		verbose_name_plural = 'mreze'
 
-class Tarifa(models.Model):
-	ime_tarife = models.CharField(max_length=100)
-	prim_cij = models.DecimalField(max_digits=5, decimal_places=2)
-	druge_cij = models.DecimalField(max_digits=5, decimal_places=2)
-	sms_cij = models.DecimalField(max_digits=5, decimal_places=2)
-	mms_cij = models.DecimalField(max_digits=5, decimal_places=2)
-	net_cij = models.DecimalField(max_digits=5, decimal_places=2)
-	prim = models.IntegerField(default=1)
-	druge = models.IntegerField(default=1)
-	sms = models.IntegerField(default=1)
-	mms = models.IntegerField(default=1)
-	net = models.IntegerField(default=1)
-	uspostava = models.DecimalField(max_digits=5, decimal_places=2)
-	naknada = models.DecimalField(max_digits=5, decimal_places=2)
-	pretplata = models.DecimalField(max_digits=5, decimal_places=2)
+year_dropdown = []
+for y in range(2010, (datetime.datetime.now().year)+1):
+	year_dropdown.append((y, y))
+
+month_dropdown = []
+for m in range(1, 13):
+	month_dropdown.append((m, m))
+
+class Racun(models.Model):
+	prim = models.IntegerField()
+	druge = models.IntegerField()
+	sms = models.IntegerField()
+	mms = models.IntegerField()
+	net = models.IntegerField()
+	mjesec = models.IntegerField(('mjesec'), max_length=2, choices=month_dropdown, default=datetime.datetime.now().month)
+	godina = models.IntegerField(('godina'), max_length=4, choices=year_dropdown, default=datetime.datetime.now().year)
+	korisnik = models.ForeignKey(User)
 	mreza = models.ForeignKey('Mreza')
 
-	def __str__(self):
-		return self.ime_tarife
-
 	class Meta:
-		verbose_name_plural = 'tarife'
+		verbose_name_plural = 'racuni'

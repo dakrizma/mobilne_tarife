@@ -1,2 +1,5 @@
-employees[0].firstName + " " + employees[0].lastName;
-employees[0].firstName = "Gilbert";
+{"employees":[
+    {"firstName":"John", "lastName":"Doe"}, 
+    {"firstName":"Anna", "lastName":"Smith"},
+    {"firstName":"Peter", "lastName":"Jones"}
+]}
