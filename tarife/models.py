@@ -51,7 +51,7 @@ class Racun(models.Model):
 	net = models.IntegerField()
 	mjesec = models.CharField(max_length=8, choices=month_dropdown,)
 	godina = models.IntegerField(('godina'), max_length=4, choices=year_dropdown, default=datetime.datetime.now().year)
-	korisnik = models.ForeignKey(User)
+	korisnik = models.ForeignKey(User, )
 	mreza = models.ForeignKey('Mreza')
 
 	class Meta:

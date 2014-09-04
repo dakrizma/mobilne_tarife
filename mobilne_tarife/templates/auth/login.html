@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "master.html" %}
 {% load url from future %}
 
 {% block content %}
@@ -6,20 +6,15 @@
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
-
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-<p>
-    {{ form.username.label_tag }}
-    {{ form.username }}
-</p>
-<p>
-    {{ form.password.label_tag }}
-    {{ form.password }}
-</p>
-
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
-
+<div class="container">
+	<div class="grid-12">
+		<form class="input_data_form" method="post" action="{% url 'login' %}">{% csrf_token %}
+			<ul>
+				{{ form.as_ul }}
+			</ul>
+			<input type="submit" value="login" />
+			<input type="hidden" name="next" value="{{ next }}" />
+		</form>
+	</div>
+</div>
 {% endblock %}

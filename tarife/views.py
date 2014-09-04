@@ -1,18 +1,19 @@
 from tarife.models import Mreza, Racun
 from django.contrib.auth.models import User
-from tarife.forms import RacunForm, UserForm
+from django.contrib.auth.forms import UserCreationForm
+from tarife.forms import RacunForm
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 import json
 
 def register(request):
 	if request.method == 'POST':
-		form = UserForm(request.POST)
+		form = UserCreationForm(request.POST)
 		if form.is_valid():
-			form.save()
+			# form.save()
 			return render(request, 'tarife/index.html',)
 	else:
-		form = UserForm()
+		form = UserCreationForm()
 	return render(request, 'tarife/register.html', {'form': form})
 
 @login_required
@@ -24,10 +25,20 @@ def index(request):
 			racun.korisnik = request.user		# ovo radimo zato sto moderator je NOT_NULL
 			racun.save()						# snimi
 			data = []
-			json_data = open('data.json')
+			json_data = open('remote_server_simulation/data.json')
 			data = json.load(json_data)
-			br = len(Racun.objects.all())-1
-			rn = Racun.objects.all()[br]
+			objects = Racun.objects.all() 
+			br = len(objects)-1
+
+			# i = 0
+			# while (i < br):
+			# 	if (racun.korisnik == objects[i].korisnik):
+			rn = objects[br]
+			# 	else:
+					
+			# if korisnik, mjesec, godina:
+			# 	unijeli ste podatke za taj mjesec
+
 			mjesec = rn.mjesec
 			godina = rn.godina
 			korisnik = rn.korisnik
