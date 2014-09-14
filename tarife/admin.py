@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
-from tarife.models import Mreza, Racun
+from tarife.models import *
 
 class MrezaAdmin(admin.ModelAdmin):
 	list_display = ('id', 'ime_mreze')

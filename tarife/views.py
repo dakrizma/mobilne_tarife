@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-from tarife.forms import RacunForm, BrisanjeForm
-from tarife.models import Mreza, Racun
+from tarife.forms import *
+from tarife.models import *
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 import json
 
 def register(request):
@@ -69,8 +69,6 @@ def brisanje(request):
 	if request.method == 'POST':
 		form = BrisanjeForm(request.POST)
 		if form.is_valid():
-			# form.fields['mjesec'].queryset = Racun.objects.filter(korisnik=request.user)
-			# form.fields['godina'].queryset = Racun.objects.filter(korisnik=request.user)
 			mjesec = form['mjesec'].value()
 			god = form['godina'].value()
 			godina = int(god)
@@ -121,7 +119,7 @@ def izracun2(objects, br_prim, br_druge, br_sms, br_mms, br_net, x, y):
 
 def izlaz(korisnik):
 	data = []
-	json_data = open('remote_server_simulation/data.json')		# treba staviti exeption ako ne postoji
+	json_data = open('remote_server_simulation/data.json')		# treba staviti exception ako ne postoji
 	data = json.load(json_data)
 	objects = Racun.objects.all()
 	br = len(objects)
@@ -171,22 +169,22 @@ def mj_god(mjesec, godina):
 		mj = 2
 	if (mjesec == u'ožujak'):
 		mj = 3
-	if (mjesec == 'travanj'):
+	if (mjesec == u'travanj'):
 		mj = 4
-	if (mjesec == 'svibanj'):
+	if (mjesec == u'svibanj'):
 		mj = 5
-	if (mjesec == 'lipanj'):
+	if (mjesec == u'lipanj'):
 		mj = 6
-	if (mjesec == 'srpanj'):
+	if (mjesec == u'srpanj'):
 		mj = 7
-	if (mjesec == 'kolovoz'):
+	if (mjesec == u'kolovoz'):
 		mj = 8
-	if (mjesec == 'rujan'):
+	if (mjesec == u'rujan'):
 		mj = 9
-	if (mjesec == 'listopad'):
+	if (mjesec == u'listopad'):
 		mj = 10
-	if (mjesec == 'studeni'):
+	if (mjesec == u'studeni'):
 		mj = 11
-	if (mjesec == 'prosinac'):
+	if (mjesec == u'prosinac'):
 		mj = 12
 	return(god + mj)
